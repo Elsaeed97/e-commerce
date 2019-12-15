@@ -1,0 +1,114 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title%} Blog Details || {% endblock %}
+{% block content %}
+<!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url({% static 'images/bg/4.jpg' %}) no-repeat scroll center center / cover ;">
+            <div class="ht__bradcaump__wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bradcaump__inner">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="{% url 'index'%}">Home</a>
+                                  <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
+                                  <span class="breadcrumb-item active">Blog Details</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+        <!-- Start Blog Details Area -->
+        <section class="htc__blog__details bg__white ptb--100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="htc__blog__details__wrap">
+                            <div class="ht__bl__thumb">
+                                <img src="{{ post.image.url }}" alt="blog images">
+                            </div>
+                            <div class="bl__dtl">
+                                <p>{{ post.content }},</p>
+
+                                <p>”{{ post.description }}”</p>
+                                <blockquote>
+                                    No one rejects, dislikes, or avoids pleasure itself, because it pleasure, but because those who do not know how to pursue pleasure ratinally encounter consequences that are.But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. 
+                                </blockquote>
+
+                                <p>{{ post.description }}.</p>
+                                <p>{{ post.description }}.</p>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="bl__img">
+                                            <img src="{{ post.img_1.url }}" alt="blog images">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="bl__img">
+                                            <img src="{{ post.img_2.url }}" alt="blog images">
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>{{ post.description }}</p>
+                            </div>
+                            <!-- Start Comment Area -->
+                            {% if comments%}
+                            <d iv class="htc__comment__area">
+                                <h4 class="title__line--5">HAVE {{ comments | length}} COMMENTS</h4>
+                                <div class="ht__comment__content">
+                                    <!-- Start Single Comment -->
+                                    {% for comment in comments %}
+                                    <div class="comment">
+                                        <div class="comment__thumb">
+                                            <img src="{{ comment.image.url }}" alt="comment images">
+                                        </div>
+                                        <div class="ht__comment__details">
+                                            <div class="ht__comment__title">
+                                                <h2><a href="#">{{ comment.name }}</a></h2>
+                                                
+                                            </div>
+                                            <span>{{ comment.time }}</span>
+                                            <p>{{ comment.comment }}</p>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    {% else %}
+                                    <h4 class="title__line--5">HAVE 0 COMMENTS</h4>
+                                    {% endif %}
+                                    <!-- End Single Comment -->
+                                </div>
+                            </div>
+                            <!-- End Comment Area -->
+                            <!-- Start comment Form -->
+                            <form action="{% url 'comment' %}" method="POST">
+            					{% csrf_token %}
+            					<!-- <input type="hidden" name="post_id" value="{{ post.id }}"> -->
+                            <div class="ht__comment__form">
+                                <h4 class="title__line--5">Leave a Comment</h4>
+                                <div class="ht__comment__form__inner">
+                                    <div class="comment__form">
+                                        <input type="text" name="name" placeholder="Name *" required>
+                                        <input type="email" name="email" placeholder="Email *" required>
+                                        
+                                    </div>
+                                    <div class="comment__form message">
+                                        <textarea  name="comment" placeholder="Your Comment *"required></textarea>
+                                    </div>
+                                </div>
+                                <div class="ht__comment__btn--2 mt--30">
+                                    <button class="fr__btn" type="submit"> Send</button>
+                                </div>
+                            </div>
+                            </form>
+                            <!-- End comment Form -->
+                            
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </section>
+        <!-- End Blog Details Area -->
+{% endblock%}
